@@ -10,14 +10,12 @@ public class ContactUsPage {
     @FindBy(css = "section[class='form-fields'] div")
     private WebElement contactUsLabel;
 
-
     private WebDriver driver;
 
     public ContactUsPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-
 
     public String getContactUsLabelText() {
         String contactUsText = contactUsLabel.getText();

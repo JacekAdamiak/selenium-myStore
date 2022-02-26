@@ -29,14 +29,8 @@ public class TopMenuTest {
         TopMenuPage topMenuPage = new TopMenuPage(driver);
         topMenuPage.clickOnContactUsLink();
 
-//        WebElement contactUsLabel = driver.findElement(By.xpath("//*[@id=\"content\"]/section/form/section/div[1]/div"));
         ContactUsPage contactUsPage = new ContactUsPage(driver);
-
-
-
-        System.out.println(contactUsPage.getContactUsLabelText());
-        Assert.assertEquals(contactUsPage.getContactUsLabelText(),
-                "CONTACT US");
+        Assert.assertEquals(contactUsPage.getContactUsLabelText(), "CONTACT US");
     }
 
     @Test
