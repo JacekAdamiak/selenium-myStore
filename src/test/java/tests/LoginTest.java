@@ -1,10 +1,13 @@
+package tests;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.assertEquals;
+import page.objects.LoginPage;
+import page.objects.TopMenuPage;
 
 public class LoginTest {
 
@@ -19,17 +22,6 @@ public class LoginTest {
     }
 
     @Test
-    public void asUserEnterLoginPage() {
-        driver.navigate().to("https://prod-kurs.coderslab.pl/");
-
-        TopMenuPage topMenuPage = new TopMenuPage(driver);
-        topMenuPage.clickOnSignInLink();
-
-        LoginPage loginPage = new LoginPage(driver);
-        assertEquals(loginPage.getWelcomeText(driver), "Log in to your account");
-    }
-
-    @Test
     public void asUserLoginUsingValidLoginAndPassword() {
         driver.navigate().to("https://mystore-testlab.coderslab.pl/index.php?controller=authentication&back=my-account");
 
@@ -39,7 +31,7 @@ public class LoginTest {
         loginPage.clickOnSignInButton();
 
         TopMenuPage topMenuPage = new TopMenuPage(driver);
-        assertEquals(topMenuPage.getUserName(), "Janek Bury");
+        Assert.assertEquals(topMenuPage.getUserName(), "Janek Bury");
     }
 
     @Test
@@ -50,7 +42,7 @@ public class LoginTest {
         loginPage.typeIntoUserNameField("NotExisting.login@webowo.pl");
         loginPage.typeIntoPasswordField("NotExistingPassword");
         loginPage.clickOnSignInButton();
-        assertEquals(loginPage.getAuthenticationAlertText(driver), "Authentication failed.");
+        Assert.assertEquals(loginPage.getAuthenticationAlertText(), "Authentication failed.");
     }
 
     @AfterMethod

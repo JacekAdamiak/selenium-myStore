@@ -1,3 +1,5 @@
+package page.objects;
+
 import org.openqa.selenium.WebDriver;
 
 public class MainPage {
