@@ -1,9 +1,11 @@
 package page.objects;
 
+import driver.manager.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import waits.WaitForElement;
 
 public class LoginPage {
 
@@ -24,12 +26,12 @@ public class LoginPage {
 
     private WebDriver driver;
 
-    public LoginPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+    public LoginPage() {
+        PageFactory.initElements(DriverManager.getWebDriver(), this);
     }
 
     public void typeIntoUserNameField(String userName) {
+        WaitForElement.waitUntilElementIsVisible(userNameField);
         userNameField.sendKeys(userName);
     }
 
@@ -42,13 +44,14 @@ public class LoginPage {
     }
 
     public String getWelcomeText() {
+        WaitForElement.waitUntilElementIsVisible(welcomeTextLabel);
         String welcomeText = welcomeTextLabel.getText();
         return welcomeText;
     }
 
     public String getAuthenticationAlertText() {
+        WaitForElement.waitUntilElementIsVisible(authenticationAlertLabel);
         String authenticationAlertText = authenticationAlertLabel.getText();
         return authenticationAlertText;
     }
-
 }

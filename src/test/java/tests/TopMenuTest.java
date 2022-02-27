@@ -1,5 +1,6 @@
 package tests;
 
+import driver.manager.DriverUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -10,43 +11,27 @@ import page.objects.ContactUsPage;
 import page.objects.LoginPage;
 import page.objects.TopMenuPage;
 
-public class TopMenuTest {
-
-    private WebDriver driver;
-
-    @BeforeMethod
-    public void beforeTest() {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
-        driver = new ChromeDriver();
-//        System.setProperty("webdriver.gecko.driver","src/main/resources/drivers/geckodriver.exe");
-//        driver = new FirefoxDriver();
-    }
+public class TopMenuTest extends TestBase{
 
     @Test
     public void asUserEnterContactUsPage() {
-        driver.navigate().to("https://prod-kurs.coderslab.pl/");
+        DriverUtils.navigateToPage("https://prod-kurs.coderslab.pl/");
 
-        TopMenuPage topMenuPage = new TopMenuPage(driver);
+        TopMenuPage topMenuPage = new TopMenuPage();
         topMenuPage.clickOnContactUsLink();
 
-        ContactUsPage contactUsPage = new ContactUsPage(driver);
+        ContactUsPage contactUsPage = new ContactUsPage();
         Assert.assertEquals(contactUsPage.getContactUsLabelText(), "CONTACT US");
     }
 
     @Test
     public void asUserEnterLoginPage() {
-        driver.navigate().to("https://prod-kurs.coderslab.pl/");
+        DriverUtils.navigateToPage("https://prod-kurs.coderslab.pl/");
 
-        TopMenuPage topMenuPage = new TopMenuPage(driver);
+        TopMenuPage topMenuPage = new TopMenuPage();
         topMenuPage.clickOnSignInLink();
 
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage();
         Assert.assertEquals(loginPage.getWelcomeText(), "Log in to your account");
-    }
-
-    @AfterMethod
-    public void afterTest() {
-        driver.close();
-        driver.quit();
     }
 }
