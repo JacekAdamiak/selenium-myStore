@@ -1,27 +1,22 @@
 package tests;
 
 import driver.manager.DriverUtils;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import page.objects.ContactUsPage;
-import page.objects.LoginPage;
 import page.objects.TopMenuPage;
 
-public class TopMenuTest extends TestBase{
+public class TopMenuTest extends TestBase {
 
     @Test
     public void asUserEnterContactUsPage() {
         DriverUtils.navigateToPage("https://prod-kurs.coderslab.pl/");
 
         TopMenuPage topMenuPage = new TopMenuPage();
-        topMenuPage.clickOnContactUsLink();
+        String contactUsLabelText = topMenuPage
+                .clickOnContactUsLink()
+                .getContactUsLabelText();
 
-        ContactUsPage contactUsPage = new ContactUsPage();
-        Assert.assertEquals(contactUsPage.getContactUsLabelText(), "CONTACT US");
+        Assert.assertEquals(contactUsLabelText, "CONTACT US");
     }
 
     @Test
@@ -29,9 +24,10 @@ public class TopMenuTest extends TestBase{
         DriverUtils.navigateToPage("https://prod-kurs.coderslab.pl/");
 
         TopMenuPage topMenuPage = new TopMenuPage();
-        topMenuPage.clickOnSignInLink();
+        String welcomeText = topMenuPage
+                .clickOnSignInLink()
+                .getWelcomeText();
 
-        LoginPage loginPage = new LoginPage();
-        Assert.assertEquals(loginPage.getWelcomeText(), "Log in to your account");
+        Assert.assertEquals(welcomeText, "Log in to your account");
     }
 }

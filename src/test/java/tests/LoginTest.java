@@ -1,28 +1,24 @@
 package tests;
 
 import driver.manager.DriverUtils;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import page.objects.LoginPage;
-import page.objects.TopMenuPage;
 
-public class LoginTest extends TestBase{
+public class LoginTest extends TestBase {
 
     @Test
     public void asUserLoginUsingValidLoginAndPassword() {
         DriverUtils.navigateToPage("https://mystore-testlab.coderslab.pl/index.php?controller=authentication&back=my-account");
 
         LoginPage loginPage = new LoginPage();
-        loginPage.typeIntoUserNameField("janek.bury@webowo.pl");
-        loginPage.typeIntoPasswordField("JanekBury");
-        loginPage.clickOnSignInButton();
+        String userName = loginPage
+                .typeIntoUserNameField("janek.bury@webowo.pl")
+                .typeIntoPasswordField("JanekBury")
+                .clickOnSignInButton()
+                .getUserName();
 
-        TopMenuPage topMenuPage = new TopMenuPage();
-        Assert.assertEquals(topMenuPage.getUserName(), "Janek Bury");
+        Assert.assertEquals(userName, "Janek Bury");
     }
 
     @Test
@@ -30,11 +26,13 @@ public class LoginTest extends TestBase{
         DriverUtils.navigateToPage("https://mystore-testlab.coderslab.pl/index.php?controller=authentication&back=my-account");
 
         LoginPage loginPage = new LoginPage();
-        loginPage.typeIntoUserNameField("NotExisting.login@webowo.pl");
-        loginPage.typeIntoPasswordField("NotExistingPassword");
-        loginPage.clickOnSignInButton();
-        Assert.assertEquals(loginPage.getAuthenticationAlertText(), "Authentication failed.");
-    }
+        String authenticationAlertText = loginPage
+                .typeIntoUserNameField("NotExisting.login@webowo.pl")
+                .typeIntoPasswordField("NotExistingPassword")
+                .clickOnSignInButton()
+                .getAuthenticationAlertText();
 
+        Assert.assertEquals(authenticationAlertText, "Authentication failed.");
+    }
 }
 
