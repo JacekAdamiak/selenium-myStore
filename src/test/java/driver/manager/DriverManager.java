@@ -1,31 +1,31 @@
 package driver.manager;
 
 import driver.BrowserFactory;
-import driver.BrowserType;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+
+import static configuration.TestRunProperties.getBrowserToRun;
+import static configuration.TestRunProperties.getIsRemoteRun;
+import static driver.BrowserType.FIREFOX;
 
 public class DriverManager {
 
-    private static final BrowserType BROWSER_TYPE = BrowserType.OPERA;
-
-    private static WebDriver driver;
+    private static ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<>();
 
     public DriverManager() {
     }
 
     public static WebDriver getWebDriver() {
-        if (driver == null) {
-            driver = BrowserFactory.getBrowser(BROWSER_TYPE);
+        if (webDriverThreadLocal.get() == null) {
+            webDriverThreadLocal.set(new BrowserFactory(getBrowserToRun(), getIsRemoteRun()).getBrowser());
         }
-        return driver;
+        return webDriverThreadLocal.get();
     }
 
     public static void disposeDriver() {
-        driver.close();
-        if (!BROWSER_TYPE.equals(BrowserType.FIREFOX)) {
-            driver.quit();
+        webDriverThreadLocal.get().close();
+        if (!getBrowserToRun().equals(FIREFOX)) {
+            webDriverThreadLocal.get().quit();
         }
-        driver = null;
+        webDriverThreadLocal.remove();
     }
 }

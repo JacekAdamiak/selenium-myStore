@@ -5,11 +5,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import page.objects.LoginPage;
 
+import static navigation.ApplicationURLs.LOGIN_URL;
+
 public class LoginTest extends TestBase {
 
     @Test
     public void asUserLoginUsingValidLoginAndPassword() {
-        DriverUtils.navigateToPage("https://mystore-testlab.coderslab.pl/index.php?controller=authentication&back=my-account");
+        DriverUtils.navigateToPage(LOGIN_URL);
 
         LoginPage loginPage = new LoginPage();
         String userName = loginPage
@@ -23,7 +25,7 @@ public class LoginTest extends TestBase {
 
     @Test
     public void asUserTryToLoginUsingIncorrectLoginAndPassword() {
-        DriverUtils.navigateToPage("https://mystore-testlab.coderslab.pl/index.php?controller=authentication&back=my-account");
+        DriverUtils.navigateToPage(LOGIN_URL);
 
         LoginPage loginPage = new LoginPage();
         String authenticationAlertText = loginPage

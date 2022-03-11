@@ -5,11 +5,13 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import page.objects.TopMenuPage;
 
+import static navigation.ApplicationURLs.APPLICATION_URL;
+
 public class TopMenuTest extends TestBase {
 
     @Test
     public void asUserEnterContactUsPage() {
-        DriverUtils.navigateToPage("https://prod-kurs.coderslab.pl/");
+        DriverUtils.navigateToPage(APPLICATION_URL);
 
         TopMenuPage topMenuPage = new TopMenuPage();
         String contactUsLabelText = topMenuPage
@@ -21,7 +23,7 @@ public class TopMenuTest extends TestBase {
 
     @Test
     public void asUserEnterLoginPage() {
-        DriverUtils.navigateToPage("https://prod-kurs.coderslab.pl/");
+        DriverUtils.navigateToPage(APPLICATION_URL);
 
         TopMenuPage topMenuPage = new TopMenuPage();
         String welcomeText = topMenuPage
