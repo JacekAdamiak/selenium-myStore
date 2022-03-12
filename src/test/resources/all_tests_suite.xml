@@ -5,6 +5,7 @@
 <suite name="All myStore Tests" parallel="tests" thread-count="2">
 
     <test name="Login Tests">
+        <parameter name="browser" value="OPERA"/>
         <classes>
             <class name="tests.LoginTest">
                 <methods>
@@ -16,6 +17,7 @@
     </test>
 
     <test name="Top Menu Test">
+        <parameter name="browser" value="EDGE"/>
         <classes>
             <class name="tests.TopMenuTest">
                 <methods>
