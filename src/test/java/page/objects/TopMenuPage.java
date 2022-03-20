@@ -11,7 +11,7 @@ import waits.WaitForElement;
 
 public class TopMenuPage {
 
-    private Logger logger = LogManager.getRootLogger();
+    private Logger logger = LogManager.getLogger(TopMenuPage.class);
 
     @FindBy(id = "contact-link")
     private WebElement contactUsLink;

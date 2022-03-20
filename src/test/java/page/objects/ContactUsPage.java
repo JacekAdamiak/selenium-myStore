@@ -9,7 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import waits.WaitForElement;
 
 public class ContactUsPage {
-    private Logger logger = LogManager.getRootLogger();
+
+    private Logger logger = LogManager.getLogger(ContactUsPage.class);
 
     @FindBy(css = "section[class='form-fields'] div")
     private WebElement contactUsLabel;
