@@ -20,13 +20,9 @@ public class LoginTest extends TestBase {
         DriverUtils.navigateToPage(LOGIN_URL);
 
         LoginPage loginPage = new LoginPage();
-        String userName = loginPage
-                .typeIntoUserNameField("janek.bury@webowo.pl")
+        loginPage.typeIntoUserNameField("janek.bury@webowo.pl")
                 .typeIntoPasswordField("JanekBury")
-                .clickOnSignInButton()
-                .getUserName();
-
-        Assert.assertEquals(userName, "--Janek Bury");
+                .clickOnSignInButton().assertThatUserNameIsDisplayed("Janek Bury");
     }
 
     @TmsLink("ID-2316")
@@ -38,13 +34,10 @@ public class LoginTest extends TestBase {
         DriverUtils.navigateToPage(LOGIN_URL);
 
         LoginPage loginPage = new LoginPage();
-        String authenticationAlertText = loginPage
-                .typeIntoUserNameField("NotExisting.login@webowo.pl")
+        loginPage.typeIntoUserNameField("NotExisting.login@webowo.pl")
                 .typeIntoPasswordField("NotExistingPassword")
                 .clickOnSignInButton()
-                .getAuthenticationAlertText();
-
-        Assert.assertEquals(authenticationAlertText, "Authentication failed.");
+                .assertThatAuthenticationAlertTextIsDisplayed("Authentication failed.");
     }
 }
 

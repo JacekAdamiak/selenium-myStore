@@ -1,6 +1,7 @@
 package page.objects;
 
 import driver.manager.DriverManager;
+import generic.assertions.AssertWebElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -50,12 +51,20 @@ public class LoginPage {
         return new TopMenuPage();
     }
 
-    public String getWelcomeText() {
+    public LoginPage assertThatWarningMessageIsDisplayed(String warningMessage) {
+        logger.info("Checking if warning message: --- {} --- is displayed", warningMessage);
         WaitForElement.waitUntilElementIsVisible(welcomeTextLabel);
-        String welcomeText = welcomeTextLabel.getText();
-        logger.info("Returned Welcome text was: {}", welcomeText);
-        return welcomeText;
+        AssertWebElement.assertThat(welcomeTextLabel).isDisplayed().hasText(warningMessage);
+        return this;
     }
+
+//    public String getWelcomeText() {
+//        WaitForElement.waitUntilElementIsVisible(welcomeTextLabel);
+//        String welcomeText = welcomeTextLabel.getText();
+//        logger.info("Returned Welcome text was: {}", welcomeText);
+//        return welcomeText;
+//    }
+
 
 
 }

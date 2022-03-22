@@ -4,6 +4,7 @@ import driver.manager.DriverUtils;
 import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import page.objects.LoginPage;
 import page.objects.TopMenuPage;
 
 import static navigation.ApplicationURLs.APPLICATION_URL;
@@ -19,11 +20,7 @@ public class TopMenuTest extends TestBase {
         DriverUtils.navigateToPage(APPLICATION_URL);
 
         TopMenuPage topMenuPage = new TopMenuPage();
-        String contactUsLabelText = topMenuPage
-                .clickOnContactUsLink()
-                .getContactUsLabelText();
-
-        Assert.assertEquals(contactUsLabelText, "CONTACT US");
+        topMenuPage.clickOnContactUsLink().assertThatContactUsLabelTextIsDisplayed("CONTACT US");
     }
 
     @Issue("DEFECT-12889")
@@ -36,10 +33,10 @@ public class TopMenuTest extends TestBase {
         DriverUtils.navigateToPage(APPLICATION_URL);
 
         TopMenuPage topMenuPage = new TopMenuPage();
-        String welcomeText = topMenuPage
-                .clickOnSignInLink()
-                .getWelcomeText();
+        topMenuPage.clickOnSignInLink();
 
-        Assert.assertEquals(welcomeText, "--Log in to your account");
+        LoginPage loginPage = new LoginPage();
+        loginPage.assertThatWarningMessageIsDisplayed("Log in to your account");
+
     }
 }

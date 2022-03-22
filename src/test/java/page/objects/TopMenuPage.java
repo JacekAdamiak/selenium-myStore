@@ -1,6 +1,7 @@
 package page.objects;
 
 import driver.manager.DriverManager;
+import generic.assertions.AssertWebElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -43,18 +44,18 @@ public class TopMenuPage {
         return new LoginPage();
     }
 
-    public String getUserName() {
+    public TopMenuPage assertThatUserNameIsDisplayed(String userName) {
+        logger.info("Checking if User Name: --- {} --- was displayed", userName);
         WaitForElement.waitUntilElementIsVisible(userNameLabel);
-        String userName = userNameLabel.getText();
-        logger.info("Returned User Name was: {}", userName);
-        return userName;
+        AssertWebElement.assertThat(userNameLabel).isDisplayed().hasText(userName);
+        return this;
     }
 
-    public String getAuthenticationAlertText() {
+    public TopMenuPage assertThatAuthenticationAlertTextIsDisplayed(String authenticationAlertText) {
+        logger.info("Checking if Authentication alert: --- {} --- was displayed", authenticationAlertText);
         WaitForElement.waitUntilElementIsVisible(authenticationAlertLabel);
-        String authenticationAlertText = authenticationAlertLabel.getText();
-        logger.info("Returned Authentication alert was: {}", authenticationAlertText);
-        return authenticationAlertText;
+        AssertWebElement.assertThat(authenticationAlertLabel).isDisplayed().hasText(authenticationAlertText);
+        return this;
     }
 
 

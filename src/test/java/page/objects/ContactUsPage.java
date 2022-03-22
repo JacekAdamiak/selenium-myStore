@@ -1,6 +1,7 @@
 package page.objects;
 
 import driver.manager.DriverManager;
+import generic.assertions.AssertWebElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
@@ -19,10 +20,18 @@ public class ContactUsPage {
         PageFactory.initElements(DriverManager.getWebDriver(), this);
     }
 
-    public String getContactUsLabelText() {
+    public ContactUsPage assertThatContactUsLabelTextIsDisplayed(String contactUsText) {
+        logger.info("Checking if Contact Us text: --- {} --- is displayed", contactUsText);
         WaitForElement.waitUntilElementIsVisible(contactUsLabel);
-        String contactUsText = contactUsLabel.getText();
-        logger.info("Returned Contact Us text was: {}", contactUsText);
-        return contactUsText;
+        AssertWebElement.assertThat(contactUsLabel).isDisplayed().hasText(contactUsText);
+        return this;
     }
+
+//    public String getContactUsLabelText() {
+//        WaitForElement.waitUntilElementIsVisible(contactUsLabel);
+//        String contactUsText = contactUsLabel.getText();
+//        logger.info("Returned Contact Us text was: {}", contactUsText);
+//        return contactUsText;
+//    }
+
 }
