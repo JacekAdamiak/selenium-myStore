@@ -4,6 +4,10 @@
 
 <suite name="All myStore Tests" parallel="tests" thread-count="2">
 
+    <listeners>
+        <listener class-name="utils.testng.listeners.TestListeners"/>
+    </listeners>
+
     <test name="Login Tests">
         <parameter name="browser" value="OPERA"/>
         <classes>

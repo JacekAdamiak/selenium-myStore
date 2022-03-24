@@ -16,6 +16,7 @@ public class TopMenuTest extends TestBase {
     @Test
     @Description("Verify that, after clicking the \"Contact us\" link, " +
             "the user will be redirected to the \"CONTACT US\" page. ")
+//    @Step("Navigate to page URL: {APPLICATION_URL}")
     public void asUserEnterContactUsPage() {
         DriverUtils.navigateToPage(APPLICATION_URL);
 
@@ -29,6 +30,7 @@ public class TopMenuTest extends TestBase {
     @Test
     @Description("Verify that, after clicking the \"Sign In\" link, " +
             "the user will be redirected to the login page.")
+//    @Step("Navigate to page URL: {APPLICATION_URL}")
     public void asUserEnterLoginPage() {
         DriverUtils.navigateToPage(APPLICATION_URL);
 
@@ -36,7 +38,7 @@ public class TopMenuTest extends TestBase {
         topMenuPage.clickOnSignInLink();
 
         LoginPage loginPage = new LoginPage();
-        loginPage.assertThatWarningMessageIsDisplayed("Log in to your account");
+        loginPage.assertThatWarningMessageIsDisplayed("--Log in to your account");
 
     }
 }

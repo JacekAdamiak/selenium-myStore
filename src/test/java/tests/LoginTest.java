@@ -16,13 +16,14 @@ public class LoginTest extends TestBase {
     @Test
     @Description("Verify that if the user log in using proper username and password " +
             "his first name and last name are displayed on right side of top menu")
+//    @Step("Navigate to page URL: {LOGIN_URL}")
     public void asUserLoginUsingValidLoginAndPassword() {
         DriverUtils.navigateToPage(LOGIN_URL);
 
         LoginPage loginPage = new LoginPage();
         loginPage.typeIntoUserNameField("janek.bury@webowo.pl")
                 .typeIntoPasswordField("JanekBury")
-                .clickOnSignInButton().assertThatUserNameIsDisplayed("Janek Bury");
+                .clickOnSignInButton().assertThatUserNameIsDisplayed("--Janek Bury");
     }
 
     @TmsLink("ID-2316")
@@ -30,6 +31,7 @@ public class LoginTest extends TestBase {
     @Test
     @Description("Verify that if the user log in using not proper username and password " +
             "warning message \"Authentication failed.\" is displayed")
+//    @Step("Navigate to page URL: {LOGIN_URL}")
     public void asUserTryToLoginUsingIncorrectLoginAndPassword() {
         DriverUtils.navigateToPage(LOGIN_URL);
 

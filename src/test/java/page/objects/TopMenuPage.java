@@ -2,6 +2,7 @@ package page.objects;
 
 import driver.manager.DriverManager;
 import generic.assertions.AssertWebElement;
+import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -30,6 +31,7 @@ public class TopMenuPage {
         PageFactory.initElements(DriverManager.getWebDriver(), this);
     }
 
+    @Step("Click on Contact Us link")
     public ContactUsPage clickOnContactUsLink() {
         WaitForElement.waitUntilElementIsClickable(contactUsLink);
         contactUsLink.click();
@@ -37,6 +39,7 @@ public class TopMenuPage {
         return new ContactUsPage();
     }
 
+    @Step("Click on Sign In link")
     public LoginPage clickOnSignInLink() {
         WaitForElement.waitUntilElementIsClickable(signInLink);
         signInLink.click();
@@ -44,13 +47,15 @@ public class TopMenuPage {
         return new LoginPage();
     }
 
+    @Step("Getting user name from Top Menu: {userName}")
     public TopMenuPage assertThatUserNameIsDisplayed(String userName) {
-        logger.info("Checking if User Name: --- {} --- was displayed", userName);
+        logger.info("Checking if User Name: {} was displayed", userName);
         WaitForElement.waitUntilElementIsVisible(userNameLabel);
         AssertWebElement.assertThat(userNameLabel).isDisplayed().hasText(userName);
         return this;
     }
 
+    @Step("Getting authentication alert from Login page: {authenticationAlertText}")
     public TopMenuPage assertThatAuthenticationAlertTextIsDisplayed(String authenticationAlertText) {
         logger.info("Checking if Authentication alert: --- {} --- was displayed", authenticationAlertText);
         WaitForElement.waitUntilElementIsVisible(authenticationAlertLabel);

@@ -2,6 +2,7 @@ package page.objects;
 
 import driver.manager.DriverManager;
 import generic.assertions.AssertWebElement;
+import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
@@ -20,6 +21,7 @@ public class ContactUsPage {
         PageFactory.initElements(DriverManager.getWebDriver(), this);
     }
 
+    @Step("Getting title text from Contact Us page: {contactUsText}")
     public ContactUsPage assertThatContactUsLabelTextIsDisplayed(String contactUsText) {
         logger.info("Checking if Contact Us text: --- {} --- is displayed", contactUsText);
         WaitForElement.waitUntilElementIsVisible(contactUsLabel);
